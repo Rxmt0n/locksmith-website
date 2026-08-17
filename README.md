@@ -9,3 +9,7 @@ Website for my dad's locksmith business.
 - Node.js
 - Express
 - PostgreSQL
+
+## Features
+
+- Homepage
