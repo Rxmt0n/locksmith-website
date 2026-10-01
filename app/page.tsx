@@ -15,7 +15,7 @@ export default function Home() {
           <div className="flex items-center space-x-2">
             <span className="text-2xl">🔑</span>
             <span className="font-extrabold text-xl tracking-tight text-white">
-              Apex<span className="text-amber-500">Locksmith</span>
+              MyLocksmith<span className="text-amber-500">Services</span>
             </span>
           </div>
           <nav className="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
@@ -240,7 +240,7 @@ export default function Home() {
       {/* 7. Footer */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 text-center text-slate-500 text-xs">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 Apex Locksmith Services. All rights reserved.</p>
+          <p>© 2026 MyLocksMithServices. All rights reserved.</p>
           <div className="flex space-x-6">
             <a href="#" className="hover:text-slate-400 transition">Privacy Policy</a>
             <a href="#" className="hover:text-slate-400 transition">Terms of Service</a>
