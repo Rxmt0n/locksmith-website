@@ -1,61 +1,128 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const phoneNumber = "(778) 858-6166";
+  const telLink = "tel:7788586166";
+
+  const toggleMenu = () => setMobileMenuOpen((prev) => !prev);
+  const closeMenu = () => setMobileMenuOpen(false);
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
       
-      {/* 1. Emergency Top Bar */}
-      <div className="bg-amber-500 text-slate-950 px-4 py-2 text-center text-sm font-bold tracking-wide sticky top-0 z-50 shadow-md">
-        ⚡ 24/7 Emergency Locksmith Service
+      {/* Sticky Header Group */}
+      <div className="sticky top-0 z-50">
+        {/* 1. Emergency Top Bar */}
+        <div className="bg-amber-500 text-slate-950 px-4 py-2 text-center text-xs sm:text-sm font-bold tracking-wide shadow-md">
+          ⚡ 24/7 Emergency Locksmith Service &mdash; Fast Dispatch
+        </div>
+
+        {/* 2. Navigation Header */}
+        <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl" aria-hidden="true">🔑</span>
+              <span className="font-extrabold text-xl tracking-tight text-white">
+                MyLocksmith<span className="text-amber-500">Services</span>
+              </span>
+            </div>
+            
+            {/* Desktop Navigation Links */}
+            <nav className="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+              <a href="#services" className="hover:text-amber-400 transition-colors">Services</a>
+              <a href="#products" className="hover:text-amber-400 transition-colors">Products & Hardware</a>
+              <a href="#contact" className="hover:text-amber-400 transition-colors">Contact</a>
+            </nav>
+
+            {/* Desktop & Mobile Header CTAs */}
+            <div className="flex items-center space-x-3">
+              <a
+                href={telLink}
+                className="hidden sm:inline-flex bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm px-4 py-2 rounded-lg transition-colors shadow-sm"
+              >
+                Call {phoneNumber}
+              </a>
+
+              {/* Hamburger Button (Mobile Only) */}
+              <button
+                type="button"
+                onClick={toggleMenu}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+                className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition focus:outline-none focus:ring-2 focus:ring-amber-500"
+              >
+                {mobileMenuOpen ? (
+                  /* Close Icon (X) */
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  /* Hamburger Icon */
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* 3. Mobile Navigation Drawer Overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-slate-900 border-b border-slate-800 px-6 py-6 space-y-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
+            <nav className="flex flex-col space-y-4 font-semibold text-base text-slate-200">
+              <a href="#services" onClick={closeMenu} className="hover:text-amber-400 transition-colors py-1">
+                Services
+              </a>
+              <a href="#products" onClick={closeMenu} className="hover:text-amber-400 transition-colors py-1">
+                Products & Hardware
+              </a>
+              <a href="#contact" onClick={closeMenu} className="hover:text-amber-400 transition-colors py-1">
+                Contact
+              </a>
+            </nav>
+
+            <div className="pt-4 border-t border-slate-800">
+              <a
+                href={telLink}
+                onClick={closeMenu}
+                className="w-full inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-base py-3 rounded-xl shadow-md transition"
+              >
+                📞 Emergency Call: {phoneNumber}
+              </a>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* 2. Navigation Header */}
-      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-[36px] z-40">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="text-2xl">🔑</span>
-            <span className="font-extrabold text-xl tracking-tight text-white">
-              MyLocksmith<span className="text-amber-500">Services</span>
-            </span>
-          </div>
-          <nav className="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
-            <a href="#services" className="hover:text-amber-400 transition">Services</a>
-            <a href="#products" className="hover:text-amber-400 transition">Products & Hardware</a>
-            <a href="#about" className="hover:text-amber-400 transition">About</a>
-            <a href="#contact" className="hover:text-amber-400 transition">Contact</a>
-          </nav>
-          <a
-            href="tel:1234567890"
-            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm px-4 py-2 rounded-lg transition shadow-sm"
-          >
-            Call (778) 858-6166
-          </a>
-        </div>
-      </header>
-
-      {/* 3. Hero Section (Conversion Focused) */}
-      <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
+      {/* Hero Section */}
+      <section className="max-w-5xl mx-auto px-6 pt-12 sm:pt-16 pb-16 text-center">
         <div className="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-400 mb-6">
           <span>Shielding Your Home, Car & Business</span>
         </div>
-        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white max-w-3xl mx-auto leading-tight">
+        <h1 className="text-3xl sm:text-6xl font-black tracking-tight text-white max-w-3xl mx-auto leading-tight">
           Fast, Reliable & Licensed Locksmith Services
         </h1>
-        <p className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
           Locked out of your home or car? Need high-security hardware installed? We provide 24/7 mobile locksmith dispatch and verified security products.
         </p>
 
-        {/* Primary Call to Action */}
+        {/* Primary CTAs */}
         <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
           <a
-            href="tel:1234567890"
-            className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-lg px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition transform hover:-translate-y-0.5"
+            href={telLink}
+            className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-lg px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition transform hover:-translate-y-0.5 text-center"
           >
-            📞 Call Dispatch Now
+            📞 Call Dispatch ({phoneNumber})
           </a>
           <a
             href="#products"
-            className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl border border-slate-800 transition"
+            className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl border border-slate-800 transition text-center"
           >
             Shop Hardware Store
           </a>
@@ -63,13 +130,14 @@ export default function Home() {
 
         {/* Quick Stats Banner */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-slate-900 text-slate-400 text-sm font-medium">
-          <div><strong className="block text-xl text-white font-bold">15-20 Min</strong> Avg Arrival Time</div>
           <div><strong className="block text-xl text-white font-bold">24/7</strong> Emergency Mobile</div>
+          <div><strong className="block text-xl text-white font-bold">15-30 Min</strong> Avg. Arrival</div>
           <div><strong className="block text-xl text-white font-bold">Licensed</strong> & Insured</div>
+          <div><strong className="block text-xl text-white font-bold">Upfront</strong> Transparent Pricing</div>
         </div>
       </section>
 
-      {/* 4. Core Services Section */}
+      {/* Core Services Section */}
       <section id="services" className="max-w-6xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-white tracking-tight">Our Professional Services</h2>
@@ -106,12 +174,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Products Storefront (E-Commerce Section) */}
+      {/* Products Storefront */}
       <section id="products" className="max-w-6xl mx-auto px-6 py-16 border-t border-slate-900">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
           <div>
             <h2 className="text-3xl font-bold text-white tracking-tight">Security Hardware Store</h2>
-            <p className="text-slate-400 mt-2 text-sm">Direct purchase with instant Stripe checkout integration</p>
+            <p className="text-slate-400 mt-2 text-sm">Direct purchase with instant checkout integration</p>
           </div>
           <span className="text-xs bg-slate-900 border border-slate-800 text-slate-400 px-3 py-1 rounded-full mt-4 md:mt-0">
             🔒 Powered by Stripe Payments
@@ -119,7 +187,6 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          
           {/* Product 1 */}
           <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between">
             <div>
@@ -133,7 +200,7 @@ export default function Home() {
             </div>
             <div className="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between">
               <span className="text-xl font-extrabold text-amber-400">$49.99</span>
-              <button className="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold px-4 py-2 rounded-lg transition">
+              <button className="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold px-4 py-2.5 rounded-lg transition">
                 Buy Direct
               </button>
             </div>
@@ -152,7 +219,7 @@ export default function Home() {
             </div>
             <div className="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between">
               <span className="text-xl font-extrabold text-amber-400">$129.99</span>
-              <button className="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold px-4 py-2 rounded-lg transition">
+              <button className="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold px-4 py-2.5 rounded-lg transition">
                 Buy Direct
               </button>
             </div>
@@ -171,18 +238,17 @@ export default function Home() {
             </div>
             <div className="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between">
               <span className="text-xl font-extrabold text-amber-400">$34.99</span>
-              <button className="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold px-4 py-2 rounded-lg transition">
+              <button className="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold px-4 py-2.5 rounded-lg transition">
                 Buy Direct
               </button>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* 6. Contact & Quote Request Form */}
-      <section id="contact" className="max-w-4xl mx-auto px-6 py-16">
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 sm:p-12">
+      {/* Contact & Quote Request Form */}
+      <section id="contact" className="max-w-4xl mx-auto px-6 py-16 border-t border-slate-900">
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-12">
           <div className="text-center max-w-md mx-auto mb-8">
             <h2 className="text-2xl font-bold text-white">Request a Free Locksmith Quote</h2>
             <p className="text-slate-400 text-xs mt-2">Need non-emergency service? Fill out the form and we'll reply within 15 minutes.</p>
@@ -191,36 +257,48 @@ export default function Home() {
           <form className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Your Name</label>
+                <label htmlFor="name" className="block text-xs font-medium text-slate-300 mb-1">Your Name</label>
                 <input
+                  id="name"
+                  name="name"
                   type="text"
+                  required
                   placeholder="John Doe"
                   className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Phone Number</label>
+                <label htmlFor="phone" className="block text-xs font-medium text-slate-300 mb-1">Phone Number</label>
                 <input
+                  id="phone"
+                  name="phone"
                   type="tel"
-                  placeholder="(555) 000-0000"
+                  required
+                  placeholder="(778) 858-6166"
                   className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Service Needed</label>
-              <select className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500 transition">
-                <option>Residential Lockout / Rekey</option>
-                <option>Automotive / Car Key Duplication</option>
-                <option>Commercial Lock Installation</option>
-                <option>Hardware Order Inquiry</option>
+              <label htmlFor="service" className="block text-xs font-medium text-slate-300 mb-1">Service Needed</label>
+              <select
+                id="service"
+                name="service"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500 transition"
+              >
+                <option value="residential">Residential Lockout / Rekey</option>
+                <option value="automotive">Automotive / Car Key Duplication</option>
+                <option value="commercial">Commercial Lock Installation</option>
+                <option value="hardware">Hardware Order Inquiry</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Details / Location</label>
+              <label htmlFor="details" className="block text-xs font-medium text-slate-300 mb-1">Details / Location</label>
               <textarea
+                id="details"
+                name="details"
                 rows={3}
                 placeholder="Describe your issue or specify hardware specs..."
                 className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition"
@@ -228,8 +306,8 @@ export default function Home() {
             </div>
 
             <button
-              type="button"
-              className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm py-3 rounded-lg transition"
+              type="submit"
+              className="w-full min-h-[48px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm py-3 rounded-lg transition"
             >
               Submit Service Request
             </button>
@@ -237,14 +315,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Footer */}
+      {/* Footer */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 text-center text-slate-500 text-xs">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 MyLocksMithServices. All rights reserved.</p>
+          <p>© 2026 MyLocksmithServices. All rights reserved.</p>
           <div className="flex space-x-6">
-            <a href="#" className="hover:text-slate-400 transition">Privacy Policy</a>
-            <a href="#" className="hover:text-slate-400 transition">Terms of Service</a>
-            <a href="#" className="hover:text-slate-400 transition">Licensing Info</a>
+            <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-slate-400 transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-slate-400 transition-colors">Licensing Info</a>
           </div>
         </div>
       </footer>
