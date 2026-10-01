@@ -28,7 +28,7 @@ export default function Home() {
             href="tel:1234567890"
             className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm px-4 py-2 rounded-lg transition shadow-sm"
           >
-            Call (123) 456-7890
+            Call (778) 858-6166
           </a>
         </div>
       </header>
@@ -66,7 +66,6 @@ export default function Home() {
           <div><strong className="block text-xl text-white font-bold">15-20 Min</strong> Avg Arrival Time</div>
           <div><strong className="block text-xl text-white font-bold">24/7</strong> Emergency Mobile</div>
           <div><strong className="block text-xl text-white font-bold">Licensed</strong> & Insured</div>
-          <div><strong className="block text-xl text-white font-bold">4.9 ★★★★★</strong> Google Rating</div>
         </div>
       </section>
 
